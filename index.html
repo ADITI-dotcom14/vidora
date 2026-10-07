@@ -17,48 +17,175 @@
 <div class="hr"><span class="mu" id="who"></span><button class="g" id="thm" aria-label="Toggle theme">Theme</button></div>
 </header>
 <main>
+
 <section id="s-home">
 <div class="hero">
-<p class="eyebrow">Video calls, streaming and downloads</p>
-<h1>Fast, simple, secure video for everyone</h1>
-<p class="lead">Vidora brings video calls, a powerful player, offline downloads and a safe comment community together in one place. Pick a plan that fits you and start in seconds.</p>
-<button class="cta" data-go="call">Start for free <span aria-hidden="true">&rarr;</span></button>
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="sparks" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <p class="eyebrow">Video calls, streaming and downloads</p>
+  <h1><span class="grad">Fast, simple, secure</span><br>video for everyone</h1>
+  <p class="lead">Vidora brings video calls, a powerful player, offline downloads and a safe comment community together in one place. Pick a plan that fits you and start in seconds.</p>
+  <div class="hero-cta">
+    <button class="cta" data-go="call">Start for free <span aria-hidden="true">&rarr;</span></button>
+    <button class="ghost" data-go="pl">Try the player</button>
+  </div>
+  <div class="trust"><span>No credit card</span><span>Cancel anytime</span><span>4K on Gold</span></div>
 </div>
+
 <div class="center"><h2>Everything in one place</h2></div>
 <div class="feats">
-<button class="frame" data-go="call"><span class="fi"><b>Video calls</b><span class="mu">Create a room, share your screen and chat with up to 8 people.</span></span></button>
-<button class="frame" data-go="dl"><span class="fi"><b>Downloads</b><span class="mu">Save videos for offline viewing with clear daily limits.</span></span></button>
-<button class="frame" data-go="plan"><span class="fi"><b>Plans</b><span class="mu">Free, Bronze, Silver and Gold, with test checkout.</span></span></button>
-<button class="frame" data-go="pl"><span class="fi"><b>Player</b><span class="mu">Keyboard shortcuts, captions, speed control and resume.</span></span></button>
-<button class="frame" data-go="sec"><span class="fi"><b>Security</b><span class="mu">OTP login checks, trusted devices and login history.</span></span></button>
-<button class="frame" data-go="cm"><span class="fi"><b>Comments</b><span class="mu">Reply, like, report and translate comments instantly.</span></span></button>
+<button class="frame" data-go="call"><span class="fi"><span class="dot"></span><b>Video calls</b><span class="mu">Create a room, share your screen and chat with up to 8 people.</span></span></button>
+<button class="frame" data-go="dl"><span class="fi"><span class="dot"></span><b>Downloads</b><span class="mu">Save videos for offline viewing with clear daily limits.</span></span></button>
+<button class="frame" data-go="plan"><span class="fi"><span class="dot"></span><b>Plans</b><span class="mu">Free, Bronze, Silver and Gold, with test checkout.</span></span></button>
+<button class="frame" data-go="pl"><span class="fi"><span class="dot"></span><b>Player</b><span class="mu">Keyboard shortcuts, captions, speed control and resume.</span></span></button>
+<button class="frame" data-go="sec"><span class="fi"><span class="dot"></span><b>Security</b><span class="mu">OTP login checks, trusted devices and login history.</span></span></button>
+<button class="frame" data-go="cm"><span class="fi"><span class="dot"></span><b>Comments</b><span class="mu">Reply, like, report and translate comments instantly.</span></span></button>
 </div>
 </section>
 
-<section id="s-call"><h2>Video calls</h2><p class="mu">Create or join a room. Your camera and microphone run locally; other participants are simulated because this demo has no server.</p>
-<div class="card"><div class="row"><input id="room" placeholder="Room ID" size="14"><button class="b" id="join">Create / join</button><span class="mu" id="cinfo"></span></div></div>
-<div id="callui" style="display:none"><div class="card"><div id="vids"><video id="me" autoplay muted playsinline></video></div>
-<div class="row" style="margin-top:8px"><button class="g" id="cm">Mute</button><button class="g" id="cc">Camera off</button><button class="g" id="cf">Flip camera</button><button class="g" id="cs">Share screen</button><button class="g" id="ch">Raise hand</button><button class="g" id="cl">Lock meeting</button><button class="g" id="cg">Add demo guest</button><button class="g" id="cr">Record</button><button class="b danger" id="cx">Leave</button></div>
-<div class="mu" id="cstat"></div></div>
-<div class="grid"><div class="card"><h3>Participants</h3><div id="plist"></div></div><div class="card"><h3>In-call chat</h3><div class="chat" id="cchat"></div><div class="row" id="cem"></div><div class="row"><input id="cin" placeholder="Type a message"><label class="g" style="cursor:pointer">Attach file<input type="file" id="cfile" hidden></label><button class="g" id="csend">Send</button></div></div></div></div></section>
+<section id="s-call">
+<div class="page-head">
+  <h2>Video calls</h2>
+  <p class="mu">Create or join a room. Your camera and microphone run locally; other participants are simulated because this demo has no server.</p>
+</div>
 
-<section id="s-dl"><h2>Downloads</h2><p class="mu">Limits are checked against your plan before each download. Repeating the same video within 10 minutes does not use quota.</p><div class="card"><div class="row"><span id="dlq"></span></div><div id="dlv" class="grid"></div></div>
-<h3>Downloads in your profile</h3><div class="card tbl" id="dlh"></div></section>
+<div class="card join-bar">
+  <input id="room" placeholder="Room ID" size="14">
+  <button class="b" id="join">Create / join</button>
+  <span class="mu" id="cinfo"></span>
+</div>
 
-<section id="s-plan"><h2>Subscription plans</h2><div class="card" id="cur"></div><div class="grid" id="plans"></div><h3>Payments and receipts</h3><div class="card tbl" id="pay"></div>
-<div id="rz" class="card" style="display:none"><b>Razorpay test checkout</b><p class="mu">Test mode. Pre-filled with Razorpay's test card, no real charge.</p><div class="row"><input id="cn" value="4111 1111 1111 1111" size="20"><input value="12/30" size="5"><input value="123" size="4"><input id="em" placeholder="Email for receipt" value="you@example.com"></div><div class="row" style="margin-top:8px"><button class="b" id="pnow">Pay</button><button class="g" id="pfail">Simulate failure</button><button class="g" id="pcan">Cancel</button></div></div></section>
+<div id="callui" style="display:none">
+  <div class="zm">
+    <div class="zm-stage">
+      <div class="zm-grid" id="vids">
+        <video id="me" autoplay muted playsinline></video>
+      </div>
 
-<section id="s-pl"><h2>Player</h2><p class="mu">Choose a video file from your device. Shortcuts: Space, ←/→ seek 10s, Shift+←/→ 30s, ↑/↓ volume, M mute, F fullscreen, T theater, P picture-in-picture, C captions, &lt; / &gt; speed.</p>
-<div class="row"><input type="file" id="vf" accept="video/*,.vtt"></div>
-<div class="vw" id="vw"><video id="v" playsinline></video><div id="tt"></div><div class="ctl" id="ctl"><div class="tl" id="tl"><i id="bf"></i><i id="pr"></i></div>
-<button id="pp">Play</button><button id="bk">-10s</button><button id="fw">+10s</button><button id="mt">Mute</button><input type="range" id="vol" min="0" max="1" step=".05" value="1"><span id="tm">0:00 / 0:00</span><select id="sp"><option>0.5</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select><button id="cp">CC</button><button id="pip">PiP</button><button id="th">Theater</button><button id="fs">Full</button></div></div><p class="mu" id="pinfo"></p></section>
+      <div class="zm-hud"><span id="cstat"></span></div>
 
-<section id="s-sec"><h2>Account security</h2><div class="card"><p>Theme follows login time (IST): light from 5:00 AM to 12:00 PM, dark otherwise. You can override it with the Theme button; the choice is saved.</p><div class="row"><button class="b" id="login">Simulate login</button><span class="mu" id="sinfo"></span></div>
+      <div class="zm-bar">
+        <button class="zbtn" id="cm"><i>&#127908;</i><span>Mute</span></button>
+        <button class="zbtn" id="cc"><i>&#128249;</i><span>Camera off</span></button>
+        <button class="zbtn" id="cf"><i>&#128260;</i><span>Flip</span></button>
+        <button class="zbtn" id="cs"><i>&#128421;</i><span>Share</span></button>
+        <button class="zbtn" id="ch"><i>&#9995;</i><span>Raise hand</span></button>
+        <button class="zbtn" id="cl"><i>&#128274;</i><span>Lock</span></button>
+        <button class="zbtn" id="cg"><i>&#10133;</i><span>Add guest</span></button>
+        <button class="zbtn" id="cr"><i>&#9210;</i><span>Record</span></button>
+        <button class="zbtn danger" id="cx"><i>&#10005;</i><span>Leave</span></button>
+      </div>
+    </div>
+
+    <aside class="zm-side">
+      <div class="zm-tabs">
+        <button class="on" data-zp="p">Participants</button>
+        <button data-zp="c">Chat</button>
+      </div>
+      <div class="zm-pane on" id="pane-p"><div id="plist"></div></div>
+      <div class="zm-pane" id="pane-c">
+        <div class="chat" id="cchat"></div>
+        <div class="row" id="cem"></div>
+        <div class="zm-input">
+          <input id="cin" placeholder="Type a message">
+          <label class="g clip" title="Attach file">&#128206;<input type="file" id="cfile" hidden></label>
+          <button class="b" id="csend">Send</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</section>
+
+<section id="s-dl">
+<div class="page-head">
+  <h2>Downloads</h2>
+  <p class="mu">Limits are checked against your plan before each download. Repeating the same video within 10 minutes does not use quota.</p>
+</div>
+<div class="card"><div class="row"><span id="dlq"></span></div><div id="dlv" class="grid"></div></div>
+<h3>Downloads in your profile</h3><div class="card tbl" id="dlh"></div>
+</section>
+
+<section id="s-plan">
+<div class="page-head"><h2>Subscription plans</h2></div>
+<div class="card" id="cur"></div><div class="grid" id="plans"></div>
+<h3>Payments and receipts</h3><div class="card tbl" id="pay"></div>
+<div id="rz" class="card" style="display:none"><b>Razorpay test checkout</b><p class="mu">Test mode. Pre-filled with Razorpay's test card, no real charge.</p><div class="row"><input id="cn" value="4111 1111 1111 1111" size="20"><input value="12/30" size="5"><input value="123" size="4"><input id="em" placeholder="Email for receipt" value="you@example.com"></div><div class="row" style="margin-top:8px"><button class="b" id="pnow">Pay</button><button class="g" id="pfail">Simulate failure</button><button class="g" id="pcan">Cancel</button></div></div>
+</section>
+
+<section id="s-pl">
+<div class="page-head">
+  <h2>Player</h2>
+  <p class="mu">Choose a video file from your device. Shortcuts: Space, &larr;/&rarr; seek 10s, Shift+&larr;/&rarr; 30s, &uarr;/&darr; volume, M mute, F fullscreen, T theater, P picture-in-picture, C captions, &lt; / &gt; speed.</p>
+</div>
+
+<div class="pl-bar">
+  <label class="g filebtn">&#128193; Choose video<input type="file" id="vf" accept="video/*,.vtt" hidden></label>
+  <span class="mu" id="pinfo">No file loaded</span>
+</div>
+
+<div class="yt" id="yt">
+  <div class="yt-main">
+    <div class="vw" id="vw">
+      <video id="v" playsinline></video>
+      <button class="bigplay" id="bigplay" aria-label="Play">&#9654;</button>
+      <div id="tt"></div>
+
+      <div class="ctl" id="ctl">
+        <div class="tl" id="tl"><i id="bf"></i><i id="pr"></i></div>
+        <div class="ctlrow">
+          <button id="pp" title="Play/Pause (Space)">&#9654;</button>
+          <button id="bk" title="Back 10s">&minus;10</button>
+          <button id="fw" title="Forward 10s">+10</button>
+          <button id="mt" title="Mute (M)">&#128266;</button>
+          <input type="range" id="vol" min="0" max="1" step=".05" value="1" aria-label="Volume">
+          <span id="tm">0:00 / 0:00</span>
+          <span class="sp"></span>
+          <select id="sp" title="Speed"><option>0.5</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select>
+          <button id="cp" title="Captions (C)">CC</button>
+          <button id="pip" title="Picture in picture (P)">PiP</button>
+          <button id="th" title="Theater (T)">&#9634;</button>
+          <button id="fs" title="Fullscreen (F)">&#9974;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="yt-info">
+      <h3 class="yt-title" id="ytitle">Untitled video</h3>
+      <div class="yt-sub">
+        <div class="yt-chan"><span class="av">V</span><div><b>Vidora Player</b><div class="mu">Local playback &middot; demo</div></div></div>
+        <div class="row">
+          <button class="g" id="like">&#128077; Like</button>
+          <button class="g" id="share">&#10150; Share</button>
+          <button class="g" id="save">&#11015; Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="yt-side">
+    <div class="yt-sidehead"><b>Up next</b><span class="mu">Autoplay off</span></div>
+    <div id="ups"></div>
+  </aside>
+</div>
+</section>
+
+<section id="s-sec">
+<div class="page-head"><h2>Account security</h2></div>
+<div class="card"><p>Theme follows login time (IST): light from 5:00 AM to 12:00 PM, dark otherwise. You can override it with the Theme button; the choice is saved.</p><div class="row"><button class="b" id="login">Simulate login</button><span class="mu" id="sinfo"></span></div>
 <div id="otpbox" style="display:none;margin-top:8px"><p class="mu">New browser, device or location detected. Enter the OTP sent to your registered email or mobile. Demo OTP: <b id="otpv"></b></p><div class="row"><input id="otp" placeholder="6-digit OTP" size="10"><label><input type="checkbox" id="trust"> Trust this device for 30 days</label><button class="b" id="vo">Verify</button></div></div></div>
-<h3>Login history</h3><div class="card tbl" id="lh"></div><h3>Trusted devices</h3><div class="card" id="td"></div></section>
+<h3>Login history</h3><div class="card tbl" id="lh"></div><h3>Trusted devices</h3><div class="card" id="td"></div>
+</section>
 
-<section id="s-cm"><h2>Comments</h2><div class="card"><div class="row"><select id="lang" aria-label="Translate comments to"></select><select id="sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="likes">Most liked</option><option value="rel">Most relevant</option></select></div>
-<textarea id="ct" rows="2" style="width:100%;margin-top:8px" placeholder="Add a comment. Use @username to mention."></textarea><div class="row" id="cem2" style="margin-top:6px"></div><div class="row"><button class="b" id="cpost">Post</button><span id="cerr" class="er"></span></div><div id="cap" style="display:none" class="row mu"><span id="capq"></span><input id="capa" size="4"></div></div><div id="clist"></div></section>
+<section id="s-cm">
+<div class="page-head"><h2>Comments</h2></div>
+<div class="card"><div class="row"><select id="lang" aria-label="Translate comments to"></select><select id="sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="likes">Most liked</option><option value="rel">Most relevant</option></select></div>
+<textarea id="ct" rows="2" style="width:100%;margin-top:8px" placeholder="Add a comment. Use @username to mention."></textarea><div class="row" id="cem2" style="margin-top:6px"></div><div class="row"><button class="b" id="cpost">Post</button><span id="cerr" class="er"></span></div><div id="cap" style="display:none" class="row mu"><span id="capq"></span><input id="capa" size="4"></div></div><div id="clist"></div>
+</section>
+
 </main>
 <div id="toast"></div>
 <script src="script.js"></script>
