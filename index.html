@@ -1,193 +1,384 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
-<title>Vidora</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="top">
-<a class="logo" href="#" aria-label="Vidora home">vidora</a>
-<nav id="nav"></nav>
-<div class="hr"><span class="mu" id="who"></span><button class="g" id="thm" aria-label="Toggle theme">Theme</button></div>
-</header>
-<main>
+:root {
+  --bg: #fafcfd;
+  --card: #ffffff;
+  --tx: #141a20;
+  --mu: #4c5864;
+  --ac: #17d5ff;
+  --on-ac: #0a0e12;
+  --acx: #007a99;
+  --bd: #e6e9ee;
+  --hov: #eef2f5;
+  --ok: #1a7f4b;
+  --er: #c0341d;
+  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1217; --card: #151c23; --tx: #f2f5f8; --mu: #a3afbb; --acx: #17d5ff;
+    --bd: #27313b; --hov: #1d252d; --ok: #5fd394; --er: #ff8a73;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1217; --card: #151c23; --tx: #f2f5f8; --mu: #a3afbb; --acx: #17d5ff;
+  --bd: #27313b; --hov: #1d252d; --ok: #5fd394; --er: #ff8a73;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px)); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font: 400 16px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .price { font-family: var(--sans); color: var(--tx); }
+h1 { font-weight: 500; font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.025em; margin: 0 0 24px; }
+h2 { font-weight: 500; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
+h3 { font-weight: 600; font-size: 18px; margin: 22px 0 8px; }
 
-<section id="s-home">
-<div class="hero">
-  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="sparks" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
-  <p class="eyebrow">Video calls, streaming and downloads</p>
-  <h1><span class="grad">Fast, simple, secure</span><br>video for everyone</h1>
-  <p class="lead">Vidora brings video calls, a powerful player, offline downloads and a safe comment community together in one place. Pick a plan that fits you and start in seconds.</p>
-  <div class="hero-cta">
-    <button class="cta" data-go="call">Start for free <span aria-hidden="true">&rarr;</span></button>
-    <button class="ghost" data-go="pl">Try the player</button>
-  </div>
-  <div class="trust"><span>No credit card</span><span>Cancel anytime</span><span>4K on Gold</span></div>
-</div>
+.top {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 20px;
+  padding: 12px 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--bd);
+}
+.logo { font-weight: 700; font-size: 30px; letter-spacing: -0.05em; color: var(--tx); text-decoration: none; line-height: 1; }
+nav { display: flex; gap: 2px; flex: 1; justify-content: flex-end; overflow-x: auto; scrollbar-width: none; }
+nav::-webkit-scrollbar { display: none; }
+nav button {
+  background: none; border: 0; border-bottom: 3px solid transparent;
+  color: var(--tx); padding: 10px 12px; cursor: pointer;
+  font: 500 14px var(--sans); white-space: nowrap;
+}
+nav button:hover { background: var(--hov); }
+nav button.on { border-bottom-color: var(--ac); font-weight: 700; }
+.hr { display: flex; align-items: center; gap: 10px; }
 
-<div class="center"><h2>Everything in one place</h2></div>
-<div class="feats">
-<button class="frame" data-go="call"><span class="fi"><span class="dot"></span><b>Video calls</b><span class="mu">Create a room, share your screen and chat with up to 8 people.</span></span></button>
-<button class="frame" data-go="dl"><span class="fi"><span class="dot"></span><b>Downloads</b><span class="mu">Save videos for offline viewing with clear daily limits.</span></span></button>
-<button class="frame" data-go="plan"><span class="fi"><span class="dot"></span><b>Plans</b><span class="mu">Free, Bronze, Silver and Gold, with test checkout.</span></span></button>
-<button class="frame" data-go="pl"><span class="fi"><span class="dot"></span><b>Player</b><span class="mu">Keyboard shortcuts, captions, speed control and resume.</span></span></button>
-<button class="frame" data-go="sec"><span class="fi"><span class="dot"></span><b>Security</b><span class="mu">OTP login checks, trusted devices and login history.</span></span></button>
-<button class="frame" data-go="cm"><span class="fi"><span class="dot"></span><b>Comments</b><span class="mu">Reply, like, report and translate comments instantly.</span></span></button>
-</div>
-</section>
+main { max-width: 1100px; width: 100%; margin: 0 auto; padding: 24px 32px 80px; }
+section { display: none; }
+section.on { display: block; }
 
-<section id="s-call">
-<div class="page-head">
-  <h2>Video calls</h2>
-  <p class="mu">Create or join a room. Your camera and microphone run locally; other participants are simulated because this demo has no server.</p>
-</div>
+.hero { padding: 48px 0 72px; max-width: 900px; position: relative; overflow: visible; }
+.eyebrow {
+  font: 400 clamp(13px, 1.5vw, 18px)/1.3 var(--mono);
+  text-transform: uppercase; letter-spacing: 0.01em; margin: 0 0 20px;
+}
+.lead { font-size: clamp(17px, 2vw, 22px); line-height: 1.6; color: var(--mu); max-width: 780px; margin: 0 0 32px; }
+.cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--ac); color: var(--on-ac);
+  border: 0; border-radius: 14px; padding: 18px 26px;
+  font: 600 18px var(--sans); cursor: pointer;
+  transition: filter .15s, transform .15s;
+}
+.cta:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.center { text-align: center; margin: 8px 0 32px; }
+.center h2 { font-size: clamp(30px, 4.4vw, 52px); font-weight: 600; letter-spacing: -0.025em; }
+.feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.frame {
+  background: var(--bd); border: 0; border-radius: 28px; padding: 8px;
+  text-align: left; cursor: pointer; font: inherit; color: inherit;
+  transition: transform .15s;
+}
+.frame:hover { transform: translateY(-2px); }
+.fi {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--card); border-radius: 20px; padding: 28px 24px; min-height: 150px;
+}
+.fi b { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; }
 
-<div class="card join-bar">
-  <input id="room" placeholder="Room ID" size="14">
-  <button class="b" id="join">Create / join</button>
-  <span class="mu" id="cinfo"></span>
-</div>
+.card { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 16px 18px; margin: 12px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 4px 20px; }
+button.b, a.b {
+  background: var(--ac); color: var(--on-ac); border: 0; border-radius: 12px;
+  padding: 10px 18px; font: 600 15px var(--sans); cursor: pointer;
+}
+button.b:hover { filter: brightness(1.06); }
+button.b.danger { background: var(--er); color: #fff; }
+button.g {
+  background: var(--card); color: var(--tx); border: 1px solid var(--bd);
+  border-radius: 10px; padding: 8px 12px; font: 500 14px var(--sans); cursor: pointer;
+}
+button.g:hover { background: var(--hov); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+  outline: 2px solid var(--ac); outline-offset: 2px;
+}
+button:disabled { opacity: .5; cursor: not-allowed; }
+input, select, textarea {
+  background: var(--card); color: var(--tx); border: 1px solid var(--bd);
+  border-radius: 10px; padding: 9px 11px; font: inherit; max-width: 100%;
+}
+.mu { color: var(--mu); font-size: 14px; }
+.ok { color: var(--ok); }
+.er { color: var(--er); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+td, th { padding: 8px 10px; border-bottom: 1px solid var(--bd); text-align: left; white-space: nowrap; }
+th { font-weight: 600; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.plan.cur { border: 2px solid var(--ac); }
+.price { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
 
-<div id="callui" style="display:none">
-  <div class="zm">
-    <div class="zm-stage">
-      <div class="zm-grid" id="vids">
-        <video id="me" autoplay muted playsinline></video>
-      </div>
+#toast {
+  position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%); background: var(--tx); color: var(--bg);
+  padding: 11px 18px; border-radius: 12px; display: none; z-index: 9; max-width: 90%;
+}
 
-      <div class="zm-hud"><span id="cstat"></span></div>
+video { width: 100%; background: #000; border-radius: 12px; display: block; }
+.vw { position: relative; max-width: 100%; }
+.vw.th { max-width: 100%; }
+.vw:not(.th) { max-width: 720px; }
+.ctl {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  background: rgba(0, 0, 0, .78); padding: 8px 10px; border-radius: 0 0 12px 12px;
+  color: #fff; transition: opacity .3s;
+}
+.ctl button, .ctl select {
+  background: #2b323b; color: #fff; border: 0; border-radius: 8px;
+  padding: 6px 10px; cursor: pointer; font: inherit;
+}
+.hide .ctl { opacity: 0; }
+.hide { cursor: none; }
+.tl { position: relative; flex: 1 1 100%; height: 8px; background: #444; border-radius: 4px; cursor: pointer; }
+.tl i { position: absolute; top: 0; left: 0; height: 100%; border-radius: 4px; }
+#bf { background: #777; }
+#pr { background: var(--ac); }
+#tt { position: absolute; bottom: 14px; background: #000; color: #fff; font-size: 11px; padding: 2px 5px; border-radius: 4px; display: none; }
 
-      <div class="zm-bar">
-        <button class="zbtn" id="cm"><i>&#127908;</i><span>Mute</span></button>
-        <button class="zbtn" id="cc"><i>&#128249;</i><span>Camera off</span></button>
-        <button class="zbtn" id="cf"><i>&#128260;</i><span>Flip</span></button>
-        <button class="zbtn" id="cs"><i>&#128421;</i><span>Share</span></button>
-        <button class="zbtn" id="ch"><i>&#9995;</i><span>Raise hand</span></button>
-        <button class="zbtn" id="cl"><i>&#128274;</i><span>Lock</span></button>
-        <button class="zbtn" id="cg"><i>&#10133;</i><span>Add guest</span></button>
-        <button class="zbtn" id="cr"><i>&#9210;</i><span>Record</span></button>
-        <button class="zbtn danger" id="cx"><i>&#10005;</i><span>Leave</span></button>
-      </div>
-    </div>
+.cm { border-top: 1px solid var(--bd); padding: 12px 0; }
+.cm .rep { margin-left: 26px; }
+.av {
+  display: inline-flex; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--ac); color: var(--on-ac);
+  align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-right: 6px;
+}
+.mn { color: var(--acx); font-weight: 600; }
+.tr {
+  margin: 6px 0; padding: 8px 12px; border-left: 3px solid var(--ac);
+  background: var(--hov); border-radius: 0 8px 8px 0; font-size: 15px;
+}
 
-    <aside class="zm-side">
-      <div class="zm-tabs">
-        <button class="on" data-zp="p">Participants</button>
-        <button data-zp="c">Chat</button>
-      </div>
-      <div class="zm-pane on" id="pane-p"><div id="plist"></div></div>
-      <div class="zm-pane" id="pane-c">
-        <div class="chat" id="cchat"></div>
-        <div class="row" id="cem"></div>
-        <div class="zm-input">
-          <input id="cin" placeholder="Type a message">
-          <label class="g clip" title="Attach file">&#128206;<input type="file" id="cfile" hidden></label>
-          <button class="b" id="csend">Send</button>
-        </div>
-      </div>
-    </aside>
-  </div>
-</div>
-</section>
+#vids { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+#vids video { height: 110px; object-fit: cover; }
+.chat { height: 130px; overflow: auto; border: 1px solid var(--bd); border-radius: 12px; padding: 8px; margin: 6px 0; }
 
-<section id="s-dl">
-<div class="page-head">
-  <h2>Downloads</h2>
-  <p class="mu">Limits are checked against your plan before each download. Repeating the same video within 10 minutes does not use quota.</p>
-</div>
-<div class="card"><div class="row"><span id="dlq"></span></div><div id="dlv" class="grid"></div></div>
-<h3>Downloads in your profile</h3><div class="card tbl" id="dlh"></div>
-</section>
+.page-head { margin: 8px 0 16px; }
+.join-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-<section id="s-plan">
-<div class="page-head"><h2>Subscription plans</h2></div>
-<div class="card" id="cur"></div><div class="grid" id="plans"></div>
-<h3>Payments and receipts</h3><div class="card tbl" id="pay"></div>
-<div id="rz" class="card" style="display:none"><b>Razorpay test checkout</b><p class="mu">Test mode. Pre-filled with Razorpay's test card, no real charge.</p><div class="row"><input id="cn" value="4111 1111 1111 1111" size="20"><input value="12/30" size="5"><input value="123" size="4"><input id="em" placeholder="Email for receipt" value="you@example.com"></div><div class="row" style="margin-top:8px"><button class="b" id="pnow">Pay</button><button class="g" id="pfail">Simulate failure</button><button class="g" id="pcan">Cancel</button></div></div>
-</section>
+.orbs { position: absolute; inset: -120px -40px auto -40px; height: 420px; pointer-events: none; z-index: 0; }
+.orbs i {
+  position: absolute; border-radius: 50%; filter: blur(40px); opacity: .55;
+  animation: float 12s ease-in-out infinite;
+}
+.orbs i:nth-child(1) { width: 260px; height: 260px; background: #17d5ff; left: 5%; top: 20px; animation-delay: 0s; }
+.orbs i:nth-child(2) { width: 220px; height: 220px; background: #7c5cff; right: 10%; top: 80px; animation-delay: -3s; }
+.orbs i:nth-child(3) { width: 180px; height: 180px; background: #ff7ac6; left: 40%; top: 180px; animation-delay: -6s; }
+.orbs i:nth-child(4) { width: 140px; height: 140px; background: #ffd166; right: 30%; top: 10px; animation-delay: -9s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-24px) scale(1.06); }
+}
+.sparks { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.sparks span {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ac); opacity: .8;
+  animation: spark 6s linear infinite;
+}
+.sparks span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.sparks span:nth-child(2) { left: 25%; top: 70%; animation-delay: -1s; }
+.sparks span:nth-child(3) { left: 45%; top: 15%; animation-delay: -2s; }
+.sparks span:nth-child(4) { left: 65%; top: 60%; animation-delay: -3s; }
+.sparks span:nth-child(5) { left: 80%; top: 30%; animation-delay: -4s; }
+.sparks span:nth-child(6) { left: 15%; top: 85%; animation-delay: -5s; }
+.sparks span:nth-child(7) { left: 55%; top: 80%; animation-delay: -1.5s; }
+.sparks span:nth-child(8) { left: 90%; top: 75%; animation-delay: -2.5s; }
+.sparks span:nth-child(9) { left: 35%; top: 45%; animation-delay: -3.5s; }
+.sparks span:nth-child(10) { left: 70%; top: 10%; animation-delay: -4.5s; }
+@keyframes spark {
+  0% { transform: translateY(0) scale(.6); opacity: 0; }
+  20% { opacity: .9; }
+  100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+}
+.hero h1, .hero .eyebrow, .hero .lead, .hero-cta, .trust { position: relative; z-index: 1; }
+.grad {
+  background: linear-gradient(90deg, #17d5ff, #7c5cff 45%, #ff7ac6);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ghost {
+  background: transparent; color: var(--tx); border: 1px solid var(--bd);
+  border-radius: 14px; padding: 16px 22px; font: 600 16px var(--sans); cursor: pointer;
+}
+.ghost:hover { background: var(--hov); }
+.trust { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 22px; color: var(--mu); font-size: 14px; }
+.trust span::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ac); box-shadow: 0 0 0 4px rgba(23,213,255,.18); }
 
-<section id="s-pl">
-<div class="page-head">
-  <h2>Player</h2>
-  <p class="mu">Choose a video file from your device. Shortcuts: Space, &larr;/&rarr; seek 10s, Shift+&larr;/&rarr; 30s, &uarr;/&darr; volume, M mute, F fullscreen, T theater, P picture-in-picture, C captions, &lt; / &gt; speed.</p>
-</div>
+body[data-tab="home"] { background: radial-gradient(900px 500px at 10% -10%, rgba(23,213,255,.16), transparent 60%), var(--bg); }
+body[data-tab="call"] { background: radial-gradient(800px 500px at 90% 0%, rgba(124,92,255,.18), transparent 60%), var(--bg); }
+body[data-tab="dl"] { background: radial-gradient(800px 500px at 0% 10%, rgba(26,127,75,.14), transparent 60%), var(--bg); }
+body[data-tab="plan"] { background: radial-gradient(900px 500px at 50% -10%, rgba(255,209,102,.18), transparent 60%), var(--bg); }
+body[data-tab="pl"] { background: radial-gradient(900px 500px at 100% 0%, rgba(255,122,198,.16), transparent 60%), var(--bg); }
+body[data-tab="sec"] { background: radial-gradient(800px 500px at 0% 0%, rgba(23,213,255,.12), transparent 60%), var(--bg); }
+body[data-tab="cm"] { background: radial-gradient(800px 500px at 100% 10%, rgba(124,92,255,.14), transparent 60%), var(--bg); }
 
-<div class="pl-bar">
-  <label class="g filebtn">&#128193; Choose video<input type="file" id="vf" accept="video/*,.vtt" hidden></label>
-  <span class="mu" id="pinfo">No file loaded</span>
-</div>
+.zm {
+  display: flex;
+  gap: 12px;
+  background: #0b0f14;
+  border-radius: 20px;
+  padding: 12px;
+  border: 1px solid #1f2a36;
+  height: 80vh;
+  min-height: 600px;
+  max-height: 900px;
+}
+.zm-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #05080b;
+  border-radius: 16px;
+  overflow: hidden;
+  min-width: 0;
+}
+.zm-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  padding: 10px;
+  align-items: center;
+  justify-items: center;
+  min-height: 0;
+}
+.zm-grid video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #0d1217;
+}
+.zm-hud {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 12px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+.zm-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background: rgba(10, 15, 20, 0.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.zbtn {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 70px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font: 500 11px var(--sans);
+  transition: all 0.2s;
+}
+.zbtn:hover { background: rgba(255,255,255,0.2); }
+.zbtn i { font-style: normal; font-size: 20px; }
+.zbtn.danger { background: #7a1f1f; border-color: #a83232; }
+.zbtn.danger:hover { background: #a83232; }
+.zm-side {
+  width: 320px;
+  flex: none;
+  background: #10161d;
+  border: 1px solid #1f2a36;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.zm-tabs { display: flex; border-bottom: 1px solid #1f2a36; }
+.zm-tabs button {
+  flex: 1; background: transparent; border: 0; color: #9fb3c8; padding: 10px; cursor: pointer;
+  font: 600 13px var(--sans);
+}
+.zm-tabs button.on { color: #fff; border-bottom: 2px solid var(--ac); }
+.zm-pane { display: none; padding: 10px; flex: 1; overflow-y: auto; }
+.zm-pane.on { display: block; }
+.zm-input { display: flex; gap: 6px; margin-top: 6px; }
+.zm-input input { flex: 1; }
+.clip { display: inline-flex; align-items: center; justify-content: center; padding: 8px 10px; }
 
-<div class="yt" id="yt">
-  <div class="yt-main">
-    <div class="vw" id="vw">
-      <video id="v" playsinline></video>
-      <button class="bigplay" id="bigplay" aria-label="Play">&#9654;</button>
-      <div id="tt"></div>
+.pl-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.filebtn { cursor: pointer; }
+.yt {
+  display: grid; grid-template-columns: 1fr 340px; gap: 16px;
+}
+.yt-main { min-width: 0; }
+.yt .vw { max-width: 100%; }
+.yt video { border-radius: 16px; }
+.bigplay {
+  position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%;
+  background: rgba(0,0,0,.65); color: #fff; border: 0; font-size: 28px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; z-index: 2;
+}
+.bigplay.hide { display: none; }
+.ctlrow { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; width: 100%; }
+.ctlrow .sp { flex: 1; }
+.yt-info { padding: 12px 4px; }
+.yt-title { font-size: 20px; margin: 0 0 10px; }
+.yt-sub { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+.yt-chan { display: flex; align-items: center; gap: 10px; }
+.yt-chan .av { width: 36px; height: 36px; font-size: 15px; }
+.yt-side { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 12px; }
+.yt-sidehead { display: flex; justify-content: space-between; margin-bottom: 10px; }
+#ups .up {
+  display: flex; gap: 8px; padding: 8px; border-radius: 12px; cursor: pointer;
+}
+#ups .up:hover { background: var(--hov); }
+#ups .up .thumb { width: 80px; height: 48px; border-radius: 8px; background: linear-gradient(135deg, #17d5ff, #7c5cff); flex: none; }
+#ups .up b { font-size: 13px; display: block; }
+#ups .up .mu { font-size: 12px; }
 
-      <div class="ctl" id="ctl">
-        <div class="tl" id="tl"><i id="bf"></i><i id="pr"></i></div>
-        <div class="ctlrow">
-          <button id="pp" title="Play/Pause (Space)">&#9654;</button>
-          <button id="bk" title="Back 10s">&minus;10</button>
-          <button id="fw" title="Forward 10s">+10</button>
-          <button id="mt" title="Mute (M)">&#128266;</button>
-          <input type="range" id="vol" min="0" max="1" step=".05" value="1" aria-label="Volume">
-          <span id="tm">0:00 / 0:00</span>
-          <span class="sp"></span>
-          <select id="sp" title="Speed"><option>0.5</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select>
-          <button id="cp" title="Captions (C)">CC</button>
-          <button id="pip" title="Picture in picture (P)">PiP</button>
-          <button id="th" title="Theater (T)">&#9634;</button>
-          <button id="fs" title="Fullscreen (F)">&#9974;</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="yt-info">
-      <h3 class="yt-title" id="ytitle">Untitled video</h3>
-      <div class="yt-sub">
-        <div class="yt-chan"><span class="av">V</span><div><b>Vidora Player</b><div class="mu">Local playback &middot; demo</div></div></div>
-        <div class="row">
-          <button class="g" id="like">&#128077; Like</button>
-          <button class="g" id="share">&#10150; Share</button>
-          <button class="g" id="save">&#11015; Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <aside class="yt-side">
-    <div class="yt-sidehead"><b>Up next</b><span class="mu">Autoplay off</span></div>
-    <div id="ups"></div>
-  </aside>
-</div>
-</section>
-
-<section id="s-sec">
-<div class="page-head"><h2>Account security</h2></div>
-<div class="card"><p>Theme follows login time (IST): light from 5:00 AM to 12:00 PM, dark otherwise. You can override it with the Theme button; the choice is saved.</p><div class="row"><button class="b" id="login">Simulate login</button><span class="mu" id="sinfo"></span></div>
-<div id="otpbox" style="display:none;margin-top:8px"><p class="mu">New browser, device or location detected. Enter the OTP sent to your registered email or mobile. Demo OTP: <b id="otpv"></b></p><div class="row"><input id="otp" placeholder="6-digit OTP" size="10"><label><input type="checkbox" id="trust"> Trust this device for 30 days</label><button class="b" id="vo">Verify</button></div></div></div>
-<h3>Login history</h3><div class="card tbl" id="lh"></div><h3>Trusted devices</h3><div class="card" id="td"></div>
-</section>
-
-<section id="s-cm">
-<div class="page-head"><h2>Comments</h2></div>
-<div class="card"><div class="row"><select id="lang" aria-label="Translate comments to"></select><select id="sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="likes">Most liked</option><option value="rel">Most relevant</option></select></div>
-<textarea id="ct" rows="2" style="width:100%;margin-top:8px" placeholder="Add a comment. Use @username to mention."></textarea><div class="row" id="cem2" style="margin-top:6px"></div><div class="row"><button class="b" id="cpost">Post</button><span id="cerr" class="er"></span></div><div id="cap" style="display:none" class="row mu"><span id="capq"></span><input id="capa" size="4"></div></div><div id="clist"></div>
-</section>
-
-</main>
-<div id="toast"></div>
-<script src="script.js"></script>
-</body>
-</html>
+@media (max-width: 900px) {
+  .yt { grid-template-columns: 1fr; }
+  .zm { flex-direction: column; height: auto; min-height: auto; }
+  .zm-stage { height: 60vh; min-height: 400px; }
+  .zm-side { width: 100%; height: 400px; }
+}
+@media (max-width: 720px) {
+  .top { flex-wrap: wrap; padding: 10px 16px; gap: 8px; }
+  .logo { font-size: 26px; }
+  .hr { margin-left: auto; }
+  nav { order: 3; flex: 1 1 100%; justify-content: flex-start; }
+  main { padding: 16px 16px 64px; }
+  .hero { padding: 24px 0 48px; }
+  .cta { font-size: 16px; padding: 15px 22px; }
+  .zm-grid { grid-template-columns: 1fr; }
+  .zm-grid video { min-height: 160px; }
+}
